@@ -1,3 +1,9 @@
+import Hero from "./components/landing-page/hero";
+
 export default function Home() {
-  return <div className="bg-border-secondary">Hello World</div>;
+  return (
+    <div className="max-w-7xl mx-auto ">
+      <Hero />
+    </div>
+  );
 }
