@@ -12,7 +12,7 @@ export default function ProjectCard({
   clicks,
 }: ProjectCardProps) {
   return (
-    <div className="w-[400px] h-[132px] flex gap-5 bg-background-secondary p-3 rounded-[20px] border border-transparent hover:border-border-secondary">
+    <div className="w-[360px] h-[132px] flex gap-5 bg-background-secondary p-3 rounded-[20px] border border-transparent hover:border-border-secondary">
       <div className="size-24 rounded-md overflow-hidden flex-shrink-0">
         <img src={image} alt="Projeto" className="w-full h-full object-cover" />
       </div>

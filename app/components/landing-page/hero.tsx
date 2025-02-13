@@ -1,4 +1,4 @@
-import TextInput from "@/app/lib/text-input";
+import TextInput from "@/app/components/ui/text-input";
 import ProjectCard from "../commons/project-card";
 import TotalVisits from "../commons/total-visits";
 import UserCard from "../commons/user-card";
