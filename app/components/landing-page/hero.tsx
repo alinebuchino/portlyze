@@ -12,9 +12,9 @@ export default function Hero() {
           Seus projetos e redes sociais em um único link
         </h1>
         <h2 className="text-xl leading-6">
-          Crie sua própria página de projetos e compartilhe eles com o mundo.
+          Construa sua página de projetos e mostre suas criações para o mundo.
           <br />
-          Acompanhe o engajamento com Analytics de cliques
+          Acompanhe o engajamento com Analytics de cliques.
         </h2>
         <div className="flex items-center gap-2 w-full mt-[10vh]">
           <span className="text-white text-xl">portlyze.com</span>
