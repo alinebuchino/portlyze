@@ -1,5 +1,5 @@
-import "./globals.css";
 import { Red_Hat_Display } from "next/font/google";
+import "./globals.css";
 
 const redHatDisplay = Red_Hat_Display({
   subsets: ["latin"],
@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${redHatDisplay.className} bg-border-primary text-content-body antialiased`}
+        className={`${redHatDisplay.className} bg-background-primary text-content-body antialiased`}
       >
         {children}
       </body>
