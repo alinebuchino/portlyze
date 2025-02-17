@@ -55,3 +55,8 @@ export function handleImageInput(e: React.ChangeEvent<HTMLInputElement>) {
   }
   return null;
 }
+
+export function formatUrl(url: string) {
+  const formattedUrl = url.startsWith("http") ? url : `https://${url}`;
+  return formattedUrl;
+}
