@@ -38,10 +38,18 @@ export default function Hero() {
           </div> */}
           <div className="absolute -top-[5%] -left-[95%] -z-10">
             <ProjectCard
-              name="Projeto 1"
-              image="/project1.jpg"
-              description="Descrição detalhada do projeto"
-              clicks={25}
+              project={{
+                id: "1",
+                userId: "1",
+                projectName: "Projeto de Teste",
+                projectDescription: "Descrição detalhada do projeto",
+                projectUrl: "Url teste",
+                imagePath: "/project1.jpg",
+                createdAt: "17.02.2015",
+                totalVisits: 10,
+              }}
+              isOwner={true}
+              img="/project1.jpg"
             />
           </div>
         </div>

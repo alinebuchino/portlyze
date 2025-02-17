@@ -7,14 +7,14 @@ import { Timestamp } from "firebase-admin/firestore";
 export default async function createSocialLinks({
   profileId,
   github,
-  instagram,
   linkedin,
+  instagram,
   phone,
 }: {
   profileId: string;
   github: string;
-  instagram: string;
   linkedin: string;
+  instagram: string;
   phone: string;
 }) {
   const session = await auth();

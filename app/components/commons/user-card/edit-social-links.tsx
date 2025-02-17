@@ -8,16 +8,25 @@ import Button from "../../ui/button";
 import Modal from "../../ui/modal";
 import TextInput from "../../ui/text-input";
 
-export default function EditSocialLinks() {
+export default function EditSocialLinks({
+  socialMedias,
+}: {
+  socialMedias?: {
+    github: string;
+    instagram: string;
+    linkedin: string;
+    phone: string;
+  };
+}) {
   const router = useRouter();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSavingSocialLinks, setIsSavingSocialLinks] = useState(false);
 
-  const [github, setGithub] = useState("");
-  const [instagram, setInstagram] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [phone, setPhone] = useState("");
+  const [github, setGithub] = useState(socialMedias?.github || "");
+  const [linkedin, setLinkedin] = useState(socialMedias?.linkedin || "");
+  const [instagram, setInstagram] = useState(socialMedias?.instagram || "");
+  const [phone, setPhone] = useState(socialMedias?.phone || "");
 
   const { profileId } = useParams();
 
