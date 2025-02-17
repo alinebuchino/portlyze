@@ -30,23 +30,6 @@ export default function EditSocialLinks({
 
   const { profileId } = useParams();
 
-  function handlePhoneChange(e: { target: { value: any } }) {
-    let input = e.target.value;
-
-    // Remover qualquer coisa que não seja número
-    input = input.replace(/\D/g, "");
-
-    if (input.length <= 2) {
-      input = `(${input}`;
-    } else if (input.length <= 11) {
-      input = `(${input.slice(0, 2)}) ${input.slice(2)}`;
-    } else {
-      input = `(${input.slice(0, 2)}) ${input.slice(2, 10)}`;
-    }
-
-    setPhone(input);
-  }
-
   async function handleAddSocialLinks() {
     setIsSavingSocialLinks(true);
 
@@ -114,7 +97,7 @@ export default function EditSocialLinks({
                 type="text"
                 placeholder="Número para contato"
                 value={phone}
-                onChange={handlePhoneChange}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
           </div>

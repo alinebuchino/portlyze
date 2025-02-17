@@ -61,7 +61,7 @@ export default function UserCard({
           )}
           {profileData?.socialMedias?.phone && (
             <Link
-              href={profileData?.socialMedias?.phone}
+              href={`https://api.whatsapp.com/send?phone=${profileData?.socialMedias?.phone}`}
               target="_blank"
               className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]"
             >
