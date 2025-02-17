@@ -2,7 +2,11 @@ import ProjectCard from "@/app/components/commons/project-card";
 import TotalVisits from "@/app/components/commons/total-visits";
 import UserCard from "@/app/components/commons/user-card";
 import { auth } from "@/app/lib/auth";
-import { getProfileData } from "@/app/server/get-profile-data";
+import { getDownloadURLFromPath } from "@/app/lib/firebase";
+import {
+  getProfileData,
+  getProfileProjects,
+} from "@/app/server/get-profile-data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import NewProject from "./new-project";
@@ -19,6 +23,8 @@ export default async function ProfilePage({
   if (!profileData) return notFound();
 
   // TODO: get projects
+
+  const projects = await getProfileProjects(profileId);
 
   const session = await auth();
 
@@ -38,42 +44,14 @@ export default async function ProfilePage({
         <UserCard />
       </div>
       <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
-        <ProjectCard
-          name="Projeto 1"
-          image="/project1.jpg"
-          description="Descrição detalhada do projeto"
-          clicks={25}
-        />
-        <ProjectCard
-          name="Projeto 2"
-          image="/project2.jpg"
-          description="Descrição detalhada do projeto"
-          clicks={10}
-        />
-        <ProjectCard
-          name="Projeto 3"
-          image="/project3.jpg"
-          description="Descrição detalhada do projeto"
-          clicks={17}
-        />
-        <ProjectCard
-          name="Projeto 4"
-          image="/project4.jpg"
-          description="Descrição detalhada do projeto"
-          clicks={28}
-        />
-        <ProjectCard
-          name="Projeto 5"
-          image="/project5.jpg"
-          description="Descrição detalhada do projeto"
-          clicks={7}
-        />
-        <ProjectCard
-          name="Projeto 6"
-          image="/project6.jpg"
-          description="Descrição detalhada do projeto"
-          clicks={12}
-        />
+        {projects.map(async (project) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            isOwner={isOwner}
+            img={await getDownloadURLFromPath(project.imagePath)}
+          />
+        ))}
         {isOwner && <NewProject profileId={profileId} />}
       </div>
       <div className="absolute bottom-4 right-0 left-0 w-min mx-auto">
