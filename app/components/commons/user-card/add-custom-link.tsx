@@ -1,9 +1,10 @@
 "use client";
 
 import addCustomLinks from "@/app/actions/add-custom-links";
+import { getProfileData } from "@/app/server/get-profile-data";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import Button from "../../ui/button";
 import Modal from "../../ui/modal";
 import TextInput from "../../ui/text-input";
@@ -15,18 +16,25 @@ export default function AddCustomLink() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSavingCustomLinks, setIsSavingCustomLinks] = useState(false);
 
-  const [link1, setLink1] = useState({
-    title: "",
-    url: "",
-  });
-  const [link2, setLink2] = useState({
-    title: "",
-    url: "",
-  });
-  const [link3, setLink3] = useState({
-    title: "",
-    url: "",
-  });
+  const [link1, setLink1] = useState({ title: "", url: "" });
+  const [link2, setLink2] = useState({ title: "", url: "" });
+  const [link3, setLink3] = useState({ title: "", url: "" });
+
+  // Carregar os links personalizados ao inicializar o componente
+  useEffect(() => {
+    if (!profileId || Array.isArray(profileId)) return;
+
+    const loadLinks = async () => {
+      const profileData = await getProfileData(profileId);
+      if (profileData?.link1 || profileData?.link3 || profileData?.link3) {
+        setLink1(profileData.link1 || { title: "", url: "" });
+        setLink2(profileData.link2 || { title: "", url: "" });
+        setLink3(profileData.link3 || { title: "", url: "" });
+      }
+    };
+
+    loadLinks();
+  }, [profileId]);
 
   const handleSaveCustomLinks = async () => {
     setIsSavingCustomLinks(true);
