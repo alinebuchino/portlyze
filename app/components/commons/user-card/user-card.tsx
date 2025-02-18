@@ -35,7 +35,7 @@ export default async function UserCard({
         </div>
         <p className="opacity-40">
           {profileData?.description ||
-            "Entusiasta da Tecnologia! Desenvolvedora de Software. 👩🏻‍💻"}
+            "Entusiasta da Tecnologia! Desenvolvedora de Software. "}
         </p>
       </div>
       <div className="flex flex-col gap-2 w-full">
