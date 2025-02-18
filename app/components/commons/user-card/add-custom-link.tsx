@@ -2,7 +2,7 @@
 
 import addCustomLinks from "@/app/actions/add-custom-links";
 import { getProfileData } from "@/app/server/get-profile-data";
-import { Plus } from "lucide-react";
+import { Loader, Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
 import Button from "../../ui/button";
@@ -15,6 +15,7 @@ export default function AddCustomLink() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSavingCustomLinks, setIsSavingCustomLinks] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [link1, setLink1] = useState({ title: "", url: "" });
   const [link2, setLink2] = useState({ title: "", url: "" });
@@ -37,6 +38,7 @@ export default function AddCustomLink() {
   }, [profileId]);
 
   const handleSaveCustomLinks = async () => {
+    setLoading(true);
     setIsSavingCustomLinks(true);
 
     if (!profileId) return;
@@ -53,6 +55,7 @@ export default function AddCustomLink() {
       setIsSavingCustomLinks(false);
       router.refresh();
     });
+    setLoading(false);
   };
 
   return (
@@ -141,9 +144,15 @@ export default function AddCustomLink() {
             </button>
             <Button
               onClick={handleSaveCustomLinks}
-              disabled={isSavingCustomLinks}
+              disabled={loading && isSavingCustomLinks}
             >
-              Salvar
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <Loader className="animate-spin" />
+                </div>
+              ) : (
+                "Salvar"
+              )}
             </Button>
           </div>
         </div>

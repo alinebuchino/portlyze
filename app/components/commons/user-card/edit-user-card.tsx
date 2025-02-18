@@ -7,7 +7,7 @@ import {
   triggerImageInput,
 } from "@/app/lib/utils";
 import { ProfileData } from "@/app/server/get-profile-data";
-import { ArrowUpFromLine, UserPen } from "lucide-react";
+import { ArrowUpFromLine, Loader, UserPen } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { startTransition, useState } from "react";
 import Button from "../../ui/button";
@@ -26,6 +26,7 @@ export default function EditUserCard({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
 
+  const [loading, setLoading] = useState(false);
   const [profilePic, setProfilePic] = useState<string | null>(null);
   const [yourName, setYourName] = useState(profileData?.name || "");
   const [yourDescription, setYourDescription] = useState(
@@ -33,6 +34,7 @@ export default function EditUserCard({
   );
 
   async function handleSaveProfile() {
+    setLoading(true);
     setIsSavingProfile(true);
 
     const imagesInput = document.getElementById(
@@ -58,6 +60,7 @@ export default function EditUserCard({
       setIsSavingProfile(false);
       router.refresh();
     });
+    setLoading(false);
   }
 
   return (
@@ -137,8 +140,17 @@ export default function EditUserCard({
             >
               Voltar
             </button>
-            <Button onClick={handleSaveProfile} disabled={isSavingProfile}>
-              Salvar
+            <Button
+              onClick={handleSaveProfile}
+              disabled={loading && isSavingProfile}
+            >
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <Loader className="animate-spin" />
+                </div>
+              ) : (
+                "Salvar"
+              )}
             </Button>
           </div>
         </div>

@@ -10,9 +10,9 @@ import {
   handleImageInput,
   triggerImageInput,
 } from "@/app/lib/utils";
-import { ArrowUpFromLine, Plus } from "lucide-react";
+import { ArrowUpFromLine, Loader, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { startTransition, useState } from "react";
+import { startTransition, useState } from "react";
 
 export default function NewProject({ profileId }: { profileId: string }) {
   const router = useRouter();
@@ -23,12 +23,14 @@ export default function NewProject({ profileId }: { profileId: string }) {
   const [projectUrl, setProjectUrl] = useState("");
   const [projectImage, setProjectImage] = useState<string | null>(null);
   const [isCreatingProject, setIsCreatingProject] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleOpenModal = () => {
     setIsOpen(true);
   };
 
   async function handleCreateProject() {
+    setLoading(true);
     setIsCreatingProject(true);
     const imagesInput = document.getElementById(
       "imageInput"
@@ -58,6 +60,7 @@ export default function NewProject({ profileId }: { profileId: string }) {
 
       router.refresh();
     });
+    setLoading(false);
   }
 
   return (
@@ -153,7 +156,15 @@ export default function NewProject({ profileId }: { profileId: string }) {
             >
               Voltar
             </button>
-            <Button onClick={handleCreateProject}>Salvar</Button>
+            <Button onClick={handleCreateProject} disabled={loading}>
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <Loader className="animate-spin" />
+                </div>
+              ) : (
+                "Salvar"
+              )}
+            </Button>
           </div>
         </div>
       </Modal>

@@ -1,7 +1,7 @@
 "use client";
 
 import createSocialLinks from "@/app/actions/create-social-links";
-import { Github, Instagram, Linkedin, Phone, Plus } from "lucide-react";
+import { Github, Instagram, Linkedin, Loader, Phone, Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { startTransition, useState } from "react";
 import Button from "../../ui/button";
@@ -27,10 +27,12 @@ export default function EditSocialLinks({
   const [linkedin, setLinkedin] = useState(socialMedias?.linkedin || "");
   const [instagram, setInstagram] = useState(socialMedias?.instagram || "");
   const [phone, setPhone] = useState(socialMedias?.phone || "");
+  const [loading, setLoading] = useState(false);
 
   const { profileId } = useParams();
 
   async function handleAddSocialLinks() {
+    setLoading(true);
     setIsSavingSocialLinks(true);
 
     if (!profileId) return;
@@ -48,6 +50,7 @@ export default function EditSocialLinks({
       setIsSavingSocialLinks(false);
       router.refresh();
     });
+    setLoading(false);
   }
 
   return (
@@ -110,9 +113,15 @@ export default function EditSocialLinks({
             </button>
             <Button
               onClick={handleAddSocialLinks}
-              disabled={isSavingSocialLinks}
+              disabled={loading && isSavingSocialLinks}
             >
-              Salvar
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <Loader className="animate-spin" />
+                </div>
+              ) : (
+                "Salvar"
+              )}
             </Button>
           </div>
         </div>
