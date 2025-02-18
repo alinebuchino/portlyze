@@ -22,7 +22,7 @@ export default async function UserCard({
           src={
             (await getDownloadURLFromPath(profileData?.imagePath)) || "/me.jpeg"
           }
-          alt="Aline Buchino"
+          alt="Profile Image"
           className="rounded-full object-cover w-full h-full"
         />
       </div>
