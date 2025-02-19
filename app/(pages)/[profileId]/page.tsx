@@ -33,8 +33,6 @@ export default async function ProfilePage({
     await increaseProfileVisits(profileId);
   }
 
-  console.log(session);
-
   if (isOwner && !session?.user.isSubscribed && !session?.user.isTrial) {
     redirect(`/${profileId}/upgrade`);
   }
