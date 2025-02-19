@@ -1,7 +1,9 @@
+import { increaseProfileVisits } from "@/app/actions/increase-profile-visits";
 import ProjectCard from "@/app/components/commons/project-card";
 import TotalVisits from "@/app/components/commons/total-visits";
 import UserCard from "@/app/components/commons/user-card/user-card";
 import { auth } from "@/app/lib/auth";
+import { getDownloadURLFromPath } from "@/app/lib/firebase";
 import {
   getProfileData,
   getProfileProjects,
@@ -9,8 +11,6 @@ import {
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import NewProject from "./new-project";
-import { getDownloadURLFromPath } from "@/app/lib/firebase";
-import { increaseProfileVisits } from "@/app/actions/increase-profile-visits";
 
 export default async function ProfilePage({
   params,
@@ -32,6 +32,8 @@ export default async function ProfilePage({
   if (!isOwner) {
     await increaseProfileVisits(profileId);
   }
+
+  console.log(session);
 
   if (isOwner && !session?.user.isSubscribed && !session?.user.isTrial) {
     redirect(`/${profileId}/upgrade`);

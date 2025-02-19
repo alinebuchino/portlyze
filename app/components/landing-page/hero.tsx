@@ -25,7 +25,6 @@ export default function Hero() {
           <div className="size-48">
             <img
               src="/me.jpeg"
-              alt="Aline Buchino"
               className="rounded-full object-cover w-full h-full"
             />
           </div>

@@ -20,25 +20,23 @@ export default async function UserCard({
       <div className="size-48">
         <img
           src={
-            (await getDownloadURLFromPath(profileData?.imagePath)) || "/me.jpeg"
+            (await getDownloadURLFromPath(profileData?.imagePath)) ||
+            "/profile.png"
           }
           alt="Profile Image"
           className="rounded-full object-cover w-full h-full"
         />
       </div>
       <div className="flex flex-col gap-2 w-full">
-        <div className="flex items-center gap-2">
+        <div className="w-full flex flex-col items-center gap-2">
           <h3 className="text-3xl font-bold min-w-0 overflow-hidden">
-            {profileData?.name || "Aline Buchino"}
+            {profileData?.name}
           </h3>
           {isOwner && <EditUserCard profileData={profileData} />}
         </div>
-        <p className="opacity-40">
-          {profileData?.description ||
-            "Entusiasta da Tecnologia! Desenvolvedora de Software. "}
-        </p>
+        <p className="opacity-40">{profileData?.description}</p>
       </div>
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col items-center gap-2 w-full">
         {/* <span className="uppercase text-xs font-medium">Links</span> */}
 
         <div className="flex gap-3">
